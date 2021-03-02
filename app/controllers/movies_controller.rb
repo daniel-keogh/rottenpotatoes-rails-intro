@@ -14,7 +14,11 @@ class MoviesController < ApplicationController
       @ratings_to_show = []
     end
     
-    @movies = Movie.with_ratings(ratings)
+    unless params[:orderBy].nil?
+      @orderBy = params[:orderBy]
+    end
+    
+    @movies = Movie.with_ratings(ratings).order(@orderBy)    
     @all_ratings = Movie.all_ratings
   end
 

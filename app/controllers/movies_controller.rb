@@ -11,11 +11,11 @@ class MoviesController < ApplicationController
       ratings = params[:ratings].keys
       @ratings_to_show = ratings
     else
-      if session[:ratings].nil?
-        @ratings_to_show = []
-      else
+      if session[:ratings].any? && params[:commit] != "Refresh"
         ratings = session[:ratings]
         @ratings_to_show = session[:ratings]
+      else
+        @ratings_to_show = []
       end
     end
     
